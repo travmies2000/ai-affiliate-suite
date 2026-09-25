@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The AI Affiliate Strategy & Readiness Suite v2</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 700: '#15803d', 900: '#14532d' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Header -->
+    <header class="border-b border-slate-800 bg-slate-900/60 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                    <span class="inline-block w-3 h-3 bg-brand-500 rounded-full animate-pulse"></span>
+                    AI Affiliate Strategy & Readiness Suite
+                </h1>
+                <p class="text-xs text-slate-400">Complete Interactive Audit, Prompt Studio, Repurposing & ROI Command Center</p>
+            </div>
+            <!-- Navigation Tabs -->
+            <nav class="flex flex-wrap gap-1 bg-slate-800 p-1 rounded-xl text-xs sm:text-sm">
+                <button onclick="switchTab('audit')" id="nav-audit" class="px-3 py-2 rounded-lg font-medium transition bg-brand-600 text-white shadow">Readiness Audit</button>
+                <button onclick="switchTab('studio')" id="nav-studio" class="px-3 py-2 rounded-lg font-medium transition text-slate-300 hover:text-white">Prompt Studio</button>
+                <button onclick="switchTab('repurposing')" id="nav-repurposing" class="px-3 py-2 rounded-lg font-medium transition text-slate-300 hover:text-white">Repurposing Planner</button>
+                <button onclick="switchTab('calculator')" id="nav-calculator" class="px-3 py-2 rounded-lg font-medium transition text-slate-300 hover:text-white">ROI Calculator</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8">
+
+        <!-- TAB 1: READINESS AUDIT -->
+        <section id="tab-audit" class="space-y-8">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-xl">
+                <div class="max-w-2xl mb-8">
+                    <h2 class="text-2xl font-bold text-white mb-2">AI Marketing Readiness Audit</h2>
+                    <p class="text-slate-400 text-sm">Evaluate your digital infrastructure across automated SEO, data-driven targeting, and AI workflows. Score each criterion from 1 (Beginner) to 5 (Advanced).</p>
+                </div>
+                <form id="audit-form" class="space-y-6">
+                    <div id="questions-container" class="space-y-6"></div>
+                    <div class="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <button type="button" onclick="calculateAudit()" class="w-full sm:w-auto bg-brand-600 hover:bg-brand-500 text-white font-semibold px-8 py-3 rounded-xl shadow-lg transition duration-200">
+                            Calculate Readiness Score
+                        </button>
+                        <div id="score-summary" class="hidden text-center sm:text-right">
+                            <span class="text-xs text-slate-400 block">Total Score:</span>
+                            <span id="score-output" class="text-3xl font-extrabold text-brand-400">0 / 50</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="audit-results" class="hidden bg-slate-900 border border-brand-500/30 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-brand-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                <h3 class="text-xl font-bold text-white mb-2">Audit Performance Tier</h3>
+                <div id="tier-badge" class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4"></div>
+                <p id="tier-description" class="text-slate-300 text-sm mb-6 leading-relaxed"></p>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                    <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Recommended Immediate Next Steps:</h4>
+                    <ul id="recommendation-list" class="space-y-2 text-sm text-slate-200 list-disc list-inside"></ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: PROMPT STUDIO -->
+        <section id="tab-studio" class="hidden space-y-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-xl space-y-5">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-1">Master Prompt Studio</h2>
+                        <p class="text-slate-400 text-sm">Configure parameters to instantly generate high-converting affiliate reviews.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Select Niche / Industry</label>
+                            <input type="text" id="prompt-niche" placeholder="e.g., AI Software & SaaS" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-500 transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Featured Product Name</label>
+                            <input type="text" id="prompt-product" placeholder="e.g., HookPro Ultra" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-500 transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Main Competitor</label>
+                            <input type="text" id="prompt-competitor" placeholder="e.g., Standard Tool X" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-500 transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Primary Target Audience Pain Point</label>
+                            <input type="text" id="prompt-pain" placeholder="e.g., Low conversion rates on social traffic" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-500 transition">
+                        </div>
+                        <button type="button" onclick="generatePrompt()" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-semibold py-3 rounded-xl shadow-lg transition duration-200">
+                            Generate Master Prompt
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-bold text-white">Generated Prompt Output</h3>
+                            <button onclick="copyToClipboard('prompt-output', 'copy-btn-1')" id="copy-btn-1" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">Copy to Clipboard</button>
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 h-80 overflow-y-auto">
+                            <pre id="prompt-output" class="text-xs text-slate-300 font-mono whitespace-pre-wrap leading-relaxed">Configure parameters on the left and click 'Generate Master Prompt'...</pre>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-4">Tip: Paste directly into ChatGPT or Claude for complete review copy.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: CONTENT REPURPOSING PLANNER -->
+        <section id="tab-repurposing" class="hidden space-y-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-xl space-y-5">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-1">Content Repurposing Planner</h2>
+                        <p class="text-slate-400 text-sm">Transform core ideas into platform-specific promotional assets instantly.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Core Topic / Headline</label>
+                            <input type="text" id="repurpose-topic" placeholder="e.g., How to build automated AI affiliate workflows" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-500 transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Target Platform Format</label>
+                            <select id="repurpose-format" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-500 transition">
+                                <option value="x">X / Twitter Thread (Max 280 chars/post)</option>
+                                <option value="linkedin">LinkedIn Professional Post & Carousel</option>
+                                <option value="video">Short-Form Video Script (60s Hook & Body)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Call to Action (CTA) Link / Store</label>
+                            <input type="text" id="repurpose-cta" placeholder="e.g., Check out Digital Selling Global on Payhip" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-500 transition">
+                        </div>
+                        <button type="button" onclick="generateRepurposedContent()" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-semibold py-3 rounded-xl shadow-lg transition duration-200">
+                            Generate Repurposed Asset
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-bold text-white">Formatted Social Output</h3>
+                            <button onclick="copyToClipboard('repurpose-output', 'copy-btn-2')" id="copy-btn-2" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">Copy to Clipboard</button>
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 h-80 overflow-y-auto">
+                            <pre id="repurpose-output" class="text-xs text-slate-300 font-mono whitespace-pre-wrap leading-relaxed">Enter your core topic and select a format to generate structured social posts...</pre>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-4">Designed to respect platform character constraints and engagement best practices.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: ROI CALCULATOR -->
+        <section id="tab-calculator" class="hidden space-y-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-xl space-y-5">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-1">Affiliate Commission & ROI Calculator</h2>
+                        <p class="text-slate-400 text-sm">Model projected monthly earnings based on traffic volume and conversion parameters.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Estimated Monthly Visitors / Clicks</label>
+                            <input type="number" id="calc-visitors" value="5000" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-500 transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Conversion Rate (%)</label>
+                            <input type="number" step="0.1" id="calc-conversion" value="2.5" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-500 transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Average Order Value ($)</label>
+                            <input type="number" id="calc-aov" value="47" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-500 transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Affiliate Commission Rate (%)</label>
+                            <input type="number" id="calc-commission" value="50" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-500 transition">
+                        </div>
+                        <button type="button" onclick="calculateROI()" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-semibold py-3 rounded-xl shadow-lg transition duration-200">
+                            Calculate Projected Earnings
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-4">Projected Financial Performance</h3>
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                <span class="text-xs text-slate-400 block mb-1">Total Sales:</span>
+                                <span id="res-sales" class="text-2xl font-extrabold text-white">0</span>
+                            </div>
+                            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                <span class="text-xs text-slate-400 block mb-1">Gross Revenue:</span>
+                                <span id="res-revenue" class="text-2xl font-extrabold text-white">$0.00</span>
+                            </div>
+                        </div>
+                        <div class="bg-slate-950 p-6 rounded-xl border border-brand-500/30 text-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-brand-500/5 pointer-events-none"></div>
+                            <span class="text-xs text-brand-400 uppercase tracking-wider font-semibold block mb-1">Projected Monthly Affiliate Commission</span>
+                            <span id="res-commission" class="text-4xl font-extrabold text-brand-400">$0.00</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-4">Adjust inputs on the left to instantly simulate different traffic and tier scenarios.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Tab Switching Utility
+        function switchTab(tab) {
+            const tabs = ['audit', 'studio', 'repurposing', 'calculator'];
+            tabs.forEach(t => {
+                document.getElementById(`tab-${t}`).classList.add('hidden');
+                document.getElementById(`nav-${t}`).className = "px-3 py-2 rounded-lg font-medium transition text-slate-300 hover:text-white text-xs sm:text-sm";
+            });
+            document.getElementById(`tab-${tab}`).classList.remove('hidden');
+            document.getElementById(`nav-${tab}`).className = "px-3 py-2 rounded-lg font-medium transition bg-brand-600 text-white shadow text-xs sm:text-sm";
+        }
+
+        // Universal Copy Helper
+        function copyToClipboard(elementId, buttonId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById(buttonId);
+                const originalText = btn.innerText;
+                btn.innerText = "Copied!";
+                btn.className = "text-xs bg-brand-600 text-white px-3 py-1.5 rounded-lg transition";
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.className = "text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition";
+                }, 2000);
+            });
+        }
+
+        // Audit Questions & Logic
+        const auditQuestions = [
+            "1. Automated SEO & Generative Engine Optimization (GEO) structured metadata implementation.",
+            "2. Utilization of AI multi-agent workflows for daily social media content repurposing.",
+            "3. Integration of lead capture funnels with automated email sequence follow-ups.",
+            "4. Deployment of interactive web tools or calculators as digital lead magnets.",
+            "5. Use of data-driven tracking dashboards to monitor click-through and conversion metrics.",
+            "6. Implementation of structured prompt template libraries for rapid product reviews.",
+            "7. Consistent publishing schedule across cross-platform social thread funnels.",
+            "8. Deployment of custom domain branding and professional digital storefront architecture.",
+            "9. Automated customer engagement frameworks using direct messaging and chatbots.",
+            "10. Ongoing refinement and performance auditing of affiliate conversion funnels."
+        ];
+
+        function initAudit() {
+            const container = document.getElementById('questions-container');
+            let html = '';
+            auditQuestions.forEach((q, index) => {
+                html += `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
+                        <label class="block text-sm font-medium text-slate-200">${q}</label>
+                        <div class="flex items-center gap-4">
+                            <input type="range" min="1" max="5" value="3" id="q${index}" class="w-full accent-brand-500 cursor-pointer">
+                            <span id="val-${index}" class="text-sm font-bold text-brand-400 w-8 text-center bg-slate-900 py-1 rounded border border-slate-800">3</span>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            auditQuestions.forEach((_, index) => {
+                const slider = document.getElementById(`q${index}`);
+                const output = document.getElementById(`val-${index}`);
+                slider.addEventListener('input', (e) => { output.innerText = e.target.value; });
+            });
+        }
+
+        function calculateAudit() {
+            let total = 0;
+            for (let i = 0; i < auditQuestions.length; i++) {
+                total += parseInt(document.getElementById(`q${i}`).value);
+            }
+            document.getElementById('score-summary').classList.remove('hidden');
+            document.getElementById('score-output').innerText = `${total} / 50`;
+
+            const resultsBox = document.getElementById('audit-results');
+            const badge = document.getElementById('tier-badge');
+            const desc = document.getElementById('tier-description');
+            const recList = document.getElementById('recommendation-list');
+            resultsBox.classList.remove('hidden');
+
+            let tierName = "", badgeClass = "", descriptionText = "", recommendations = [];
+            if (total >= 40) {
+                tierName = "Tier 1: AI Affiliate Leader";
+                badgeClass = "bg-brand-500 text-slate-950";
+                descriptionText = "Your infrastructure demonstrates advanced optimization across automated workflows, multi-channel funnels, and generative search strategies.";
+                recommendations = ["Scale paid traffic acquisition to proven high-converting funnels.", "Develop proprietary web tools or software utilities to increase product value.", "Establish exclusive affiliate partnerships and private bonus bundles."];
+            } else if (total >= 25) {
+                tierName = "Tier 2: AI Emerging Strategist";
+                badgeClass = "bg-amber-500 text-slate-950";
+                descriptionText = "You have solid foundational elements in place, but there are distinct growth gaps in your automation pipelines and data tracking frameworks.";
+                recommendations = ["Implement structured prompt template libraries to streamline content output.", "Integrate automated email follow-up sequences with your primary lead magnets.", "Optimize metadata and site structures for Generative Engine Optimization (GEO)."];
+            } else {
+                tierName = "Tier 3: AI Digital Beginner";
+                badgeClass = "bg-rose-500 text-white";
+                descriptionText = "Your digital storefront requires structural enhancements across lead capture, workflow automation, and content repurposing systems.";
+                recommendations = ["Deploy standardized single-file web tools and lead capture checklists.", "Establish a consistent cross-platform social media publishing rhythm.", "Utilize conversational AI assistants to accelerate initial content creation."];
+            }
+
+            badge.className = `inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4 ${badgeClass}`;
+            badge.innerText = tierName;
+            desc.innerText = descriptionText;
+            let recHtml = '';
+            recommendations.forEach(rec => { recHtml += `<li>${rec}</li>`; });
+            recList.innerHTML = recHtml;
+            resultsBox.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Generate Master Prompt
+        function generatePrompt() {
+            const niche = document.getElementById('prompt-niche').value || '[Insert Niche]';
+            const product = document.getElementById('prompt-product').value || '[Insert Product]';
+            const competitor = document.getElementById('prompt-competitor').value || '[Insert Competitor]';
+            const pain = document.getElementById('prompt-pain').value || '[Insert Pain Point]';
+
+            const masterPrompt = `Act as an expert affiliate marketing strategist and conversion copywriter specializing in ${niche}. 
+
+Your task is to write a comprehensive, high-converting product review and promotional strategy for "${product}" compared directly against "${competitor}".
+
+Target Audience Pain Point to Address:
+"${pain}"
+
+Please structure the output with the following exact sections:
+1. EXECUTIVE HOOK: A compelling opening addressing the core pain point without fluff.
+2. PRODUCT BREAKDOWN: Core features and unique selling propositions of ${product}.
+3. COMPARATIVE ANALYSIS: A clear breakdown contrasting ${product} with ${competitor}.
+4. ACTIONABLE IMPLEMENTATION: Step-by-step guidance on how the user can deploy this strategy immediately.
+5. CALL TO ACTION: A persuasive, high-urgency closing directing readers to the storefront link.`;
+
+            document.getElementById('prompt-output').innerText = masterPrompt;
+        }
+
+        // Repurposing Planner Logic
+        function generateRepurposedContent() {
+            const topic = document.getElementById('repurpose-topic').value || '[Insert Core Topic]';
+            const format = document.getElementById('repurpose-format').value;
+            const cta = document.getElementById('repurpose-cta').value || '[Insert Link Here]';
+
+            let output = "";
+            if (format === 'x') {
+                output = `1/4 🧵 The secret to scaling your digital business without working 80 hours a week comes down to one system: ${topic}. Let's break it down in under 2 minutes. 👇\n\n` +
+                         `2/4 Most creators fail because they rely entirely on manual effort. By implementing automated AI frameworks, you can reduce content creation time by 80% while expanding your reach across platforms.\n\n` +
+                         `3/4 The formula is simple: Capture attention with precise pain-point hooks, deliver instant value via single-file digital tools, and convert traffic through optimized storefront funnels.\n\n` +
+                         `4/4 Ready to build your automated digital asset? Get the complete toolkit here: ${cta}`;
+            } else if (format === 'linkedin') {
+                output = `🚀 Strategic Insight: ${topic}\n\n` +
+                         `In today's digital economy, speed and systems dictate success. If you are still building every content piece and funnel from scratch, you are leaving massive leverage on the table.\n\n` +
+                         `Here is how top digital entrepreneurs streamline their workflow:\n` +
+                         `• Automate repetitive SEO and metadata formatting\n` +
+                         `• Package core knowledge into interactive web tools\n` +
+                         `• Repurpose long-form guides into multi-channel threads\n\n` +
+                         `What is your favorite system for scaling digital products? Let me know in the comments below! 👇\n\n` +
+                         `👉 Access the full resource suite: ${cta}`;
+            } else {
+                output = `[0:00 - 0:10] HOOK: "Stop wasting hours trying to figure out ${topic}. Here is the exact blueprint top creators use to automate their workflow in minutes."\n\n` +
+                         `[0:10 - 0:40] BODY: "Step one: Structure your content frameworks. Step two: Deploy automated scripts. Step three: Send traffic directly to your high-converting digital storefront."\n\n` +
+                         `[0:40 - 1:00] CTA: "Grab the complete system and tool stack at the link below: ${cta}"`;
+            }
+
+            document.getElementById('repurpose-output').innerText = output;
+        }
+
+        // ROI Calculator Logic
+        function calculateROI() {
+            const visitors = parseFloat(document.getElementById('calc-visitors').value) || 0;
+            const conversion = parseFloat(document.getElementById('calc-conversion').value) || 0;
+            const aov = parseFloat(document.getElementById('calc-aov').value) || 0;
+            const commissionRate = parseFloat(document.getElementById('calc-commission').value) || 0;
+
+            const sales = Math.round(visitors * (conversion / 100));
+            const revenue = sales * aov;
+            const commission = revenue * (commissionRate / 100);
+
+            document.getElementById('res-sales').innerText = sales.toLocaleString();
+            document.getElementById('res-revenue').innerText = `$${revenue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('res-commission').innerText = `$${commission.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        }
+
+        window.onload = () => {
+            initAudit();
+            calculateROI();
+        };
+    </script>
+</body>
+</html>
